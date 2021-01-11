@@ -10,7 +10,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "users")
-class User: EntityDate() {
+class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     var id: Long = 0
@@ -21,4 +21,11 @@ class User: EntityDate() {
     var password: String = ""
     @Column(name = "remember_token")
     var rememberToken: String? = null
+    @Column(name = "created_at")
+    var createdAt: Date? = Date()
+    @Column(name = "updated_at")
+    var updatedAt: Date? = null
+    @Column(name = "deleted_at")
+    var deletedAt: Date? = null
+
 }

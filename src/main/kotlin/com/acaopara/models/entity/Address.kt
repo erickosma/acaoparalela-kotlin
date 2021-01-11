@@ -9,7 +9,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "addresses")
-class Addresse {
+class Address {
 
     @Id
     @GeneratedValue

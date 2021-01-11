@@ -2,22 +2,26 @@ package com.acaopara.repository
 
 import com.acaopara.TransactionalQuarkusTest
 import com.acaopara.models.entity.User
+import io.quarkus.test.common.QuarkusTestResource
+import io.quarkus.test.h2.H2DatabaseTestResource
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-import javax.enterprise.inject.Default
 import javax.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 
 @TransactionalQuarkusTest
+@QuarkusTestResource(H2DatabaseTestResource::class)
 class UserRepositoryTest {
 
     @Inject
-    @field: Default
+    @field: javax.enterprise.inject.Default
     lateinit var userRepository: UserRepository
 
     @BeforeEach
-    fun clearDatabase() { userRepository.deleteAll() }
+    fun clearDatabase() {
+        userRepository.deleteAll()
+    }
 
     @Test
     fun `entity can be persist and found by id`() {
@@ -34,5 +38,4 @@ class UserRepositoryTest {
         assertThat(foundUser.email)
             .isEqualTo(user.email)
     }
-
 }

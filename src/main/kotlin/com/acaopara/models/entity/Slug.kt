@@ -1,6 +1,7 @@
 package com.acaopara.models.entity
 
 import java.util.Date
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -17,7 +18,10 @@ class Slug {
     var slugableType: String? = null
     var title: String? = null
     var titleSlug: String? = null
+    @Column(name = "created_at")
     var createdAt: Date? = Date()
+    @Column(name = "updated_at")
     var updatedAt: Date? = null
+    @Column(name = "deleted_at")
     var deletedAt: Date? = null
 }

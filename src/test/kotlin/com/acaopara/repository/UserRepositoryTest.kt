@@ -4,23 +4,34 @@ import com.acaopara.TransactionalQuarkusTest
 import com.acaopara.models.entity.User
 import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.h2.H2DatabaseTestResource
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 import javax.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
 
 @TransactionalQuarkusTest
 @QuarkusTestResource(H2DatabaseTestResource::class)
 class UserRepositoryTest {
 
     @Inject
-    @field: javax.enterprise.inject.Default
     lateinit var userRepository: UserRepository
 
-    @BeforeEach
+    @Inject
+    lateinit var stateRepository: StateRepository
+
+    @AfterEach
     fun clearDatabase() {
         userRepository.deleteAll()
+    }
+
+
+    @Test
+    fun `find all states`() {
+        val all  = stateRepository.findAll()
+
+        assertThat(all.count())
+            .isEqualTo(27L)
     }
 
     @Test
